@@ -1,0 +1,22 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Sky Test App with Spring Boot
+  contact:
+    email: sergendorfin@gmail.com
+    url: https://www.linkedin.com/in/sergii-kononenko/
+  license:
+    name: open
+  description: >
+    This is an **example** API to demonstrate features of the OpenAPI
+    specification and my skills.
+tags:
+  - name: User
+    description: User operations
+  - name: Project
+    description: Project operations
+paths:
+  /v1/users:
+    $ref: "./paths/v1/users.yml"
+  /v1/users/{userId}:
+    $ref: "./paths/v1/users_{userId}.yml"

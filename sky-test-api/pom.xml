@@ -61,7 +61,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/open-api-spec.yml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/spec/open-api-spec.yml</inputSpec>
                             <generatorName>java</generatorName>
                             <library>resttemplate</library>
                             <generateApiDocumentation>false</generateApiDocumentation>
