@@ -10,7 +10,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/v1/user.yml"
+            $ref: "../../components/schemas/v1/users_list.yml"
     '404':
       description: Not found
       content:
