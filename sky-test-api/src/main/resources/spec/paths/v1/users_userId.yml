@@ -2,8 +2,7 @@ get:
   tags:
     - User
   summary: Get an user by id
-  description: |
-    Get an user by id.
+  description: Get an user by id.
   operationId: getUserById
   parameters:
     - name: userId

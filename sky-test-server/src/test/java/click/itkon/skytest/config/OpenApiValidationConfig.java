@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class OpenApiValidationConfig {
 
+    private static final String OPEN_API_SPEC_PATH = "spec/open-api-spec.yml";
+
     @Bean
     public Filter validationFilter() {
         return new OpenApiValidationFilter(true, true);
@@ -19,10 +21,9 @@ public class OpenApiValidationConfig {
 
     @Bean
     public WebMvcConfigurer openApiValidationInterceptor() {
-        OpenApiInteractionValidator validator = OpenApiInteractionValidator.createForSpecificationUrl(
-                "https://api.redocly.com/registry/bundle/itkon/API%20First%20With%20Spring%20Boot-%20Development/v1/openapi.yaml?branch=development"
-        ).build();
-
+        OpenApiInteractionValidator validator = OpenApiInteractionValidator
+                .createFor(OPEN_API_SPEC_PATH)
+                .build();
         OpenApiValidationInterceptor interceptor = new OpenApiValidationInterceptor(validator);
 
         return new WebMvcConfigurer() {
@@ -33,5 +34,4 @@ public class OpenApiValidationConfig {
             }
         };
     }
-
 }

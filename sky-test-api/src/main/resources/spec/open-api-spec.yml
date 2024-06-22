@@ -19,4 +19,4 @@ paths:
   /v1/users:
     $ref: "./paths/v1/users.yml"
   /v1/users/{userId}:
-    $ref: "./paths/v1/users_{userId}.yml"
+    $ref: "./paths/v1/users_userId.yml"
