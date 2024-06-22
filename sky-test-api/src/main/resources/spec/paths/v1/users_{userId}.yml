@@ -1,14 +1,14 @@
 get:
   tags:
-    - Customer
-  summary: Get a Customer by ID
+    - User
+  summary: Get an user by id
   description: |
-    Get a Customer by ID
-  operationId: getCustomerById
+    Get an user by id.
+  operationId: getUserById
   parameters:
-    - name: customerId
+    - name: userId
       in: path
-      description: The ID of the Customer to retrieve
+      description: The ID of the user to retrieve
       required: true
       schema:
         type: string
@@ -19,7 +19,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/v"
+            $ref: "../../components/schemas/v1/user.yml"
     '400':
       description: BadRequest
     '404':

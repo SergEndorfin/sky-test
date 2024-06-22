@@ -4,9 +4,19 @@ properties:
     $ref: "../common/uuid_id.yml"
   email:
     type: string
+    maxLength: 255
+    minLength: 3
+    example: sergendorfin@gmail.com
   password:
     type: string
+    example: password+1
+  name:
+    type: string
+    example: Bob
+  dateCreated:
+    $ref: ../common/iso_timestamp.yaml
+  dateUpdated:
+    $ref: ../common/iso_timestamp.yaml
 required:
-  - id
   - password
   - email
