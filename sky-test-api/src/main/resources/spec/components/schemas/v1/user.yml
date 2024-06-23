@@ -11,12 +11,11 @@ properties:
     type: string
     example: password+1
   name:
-    type: string
-    example: Bob
+    $ref: "./user_name.yml"
   dateCreated:
-    $ref: ../common/iso_timestamp.yaml
+    $ref: "../common/iso_timestamp.yaml"
   dateUpdated:
-    $ref: ../common/iso_timestamp.yaml
+    $ref: "../common/iso_timestamp.yaml"
 required:
   - password
   - email

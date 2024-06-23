@@ -1,6 +1,6 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.User;
+import click.itkon.apifirst.model.UserDto;
 import click.itkon.skytest.services.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> listUsers() {
+    public ResponseEntity<List<UserDto>> listUsers() {
         return ResponseEntity.ok(userService.listUsers());
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable("userId") UUID userId) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable("userId") UUID userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 

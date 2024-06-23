@@ -1,6 +1,6 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.User;
+import click.itkon.apifirst.model.UserDto;
 import click.itkon.skytest.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +18,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<User> listUsers() {
+    public List<UserDto> listUsers() {
         log.info("Retrieve -> all users");
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .toList();
     }
 
     @Override
-    public User getUserById(UUID userId) {
+    public UserDto getUserById(UUID userId) {
         return userRepository.findById(userId).orElseThrow();
     }
 }
