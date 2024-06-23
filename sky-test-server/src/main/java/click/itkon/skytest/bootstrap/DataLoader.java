@@ -1,6 +1,7 @@
 package click.itkon.skytest.bootstrap;
 
 import click.itkon.apifirst.model.UserDto;
+import click.itkon.apifirst.model.UserNameDto;
 import click.itkon.skytest.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +18,7 @@ public class DataLoader implements CommandLineRunner {
         UserDto userDto = UserDto.builder()
                 .email("sam@mail.com")
                 .password("123")
-                .name("Sam")
+                .name(UserNameDto.builder().firstName("Sam").lastName("Smith").build())
                 .build();
         userRepository.save(userDto);
     }
