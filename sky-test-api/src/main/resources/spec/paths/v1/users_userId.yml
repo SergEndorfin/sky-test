@@ -18,8 +18,23 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/v1/user.yml"
+            $ref: "../../components/schemas/v1/user_response.yml"
     '400':
       description: BadRequest
     '404':
       description: Not Found
+delete:
+  summary: Delete a user
+  description: Delete a user
+  operationId: deleteUserById
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: User deleted successfully
+    '404':
+      description: User not found

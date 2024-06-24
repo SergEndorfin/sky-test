@@ -1,0 +1,55 @@
+post:
+  tags:
+    - External Project
+  summary: Add external project to a user
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/v1/externalProjects_create_request.yml'
+  responses:
+    '201':
+      description: External project added successfully
+      headers:
+        Location:
+          description: The location of the new customer
+          schema:
+            type: string
+            format: uri
+            example: /v1/users/27ca5995-f6e1-46bb-8f18-52458b7ed96e/external-projects/27ca5995-f6e1-46bb-8f18-52458b7ed96e
+    '400':
+      description: Invalid input
+    '404':
+      description: User not found
+get:
+  tags:
+    - External Project
+  summary: Retrieve external projects from a user
+  description: Retrieve external projects from a user
+  operationId: listExternalProjects
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: External projects retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+            $ref: "../../components/schemas/v1/externalProjects_list.yml"
+    '400':
+      description: Bad request
+    '404':
+      description: User not found
