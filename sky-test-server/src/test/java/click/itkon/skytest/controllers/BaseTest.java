@@ -1,6 +1,6 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.User;
+import click.itkon.skytest.domain.User;
 import click.itkon.skytest.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.Filter;
@@ -26,13 +26,13 @@ public class BaseTest {
 
     public MockMvc mockMvc;
 
-    User testUser;
+    User testUserEntity;
 
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .addFilter(validationFilter)
                 .build();
-        testUser = userRepository.findAll().iterator().next();
+        testUserEntity = userRepository.findAll().iterator().next();
     }
 }

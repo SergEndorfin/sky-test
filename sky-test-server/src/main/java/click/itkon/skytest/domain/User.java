@@ -1,6 +1,7 @@
 package click.itkon.skytest.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -12,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User  {
+@Entity
+@Table(name = "tb_user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,15 +29,17 @@ public class User  {
     private UUID id;
 
     @Embedded
-    private UserName userName;
+    private UserName name;
 
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-
-    @OneToMany
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExternalProject> externalProjects = new ArrayList<>();
 
     @CreationTimestamp

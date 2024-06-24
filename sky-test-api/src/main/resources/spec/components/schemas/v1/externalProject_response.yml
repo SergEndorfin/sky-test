@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    $ref: "../common/uuid_id.yml"
+  name:
+    type: string
+    example: "Video streaming project"
+  description:
+    type: string
+    example: "External Video streaming project"
+  user:
+    $ref: "../v1/user_response.yml"
+  dateCreated:
+    $ref: "../common/iso_timestamp.yaml"
+  dateUpdated:
+    $ref: "../common/iso_timestamp.yaml"
+required:
+  - id
+  - name
+  - description
+  - user
+  - dateCreated
+  - dateUpdated

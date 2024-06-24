@@ -1,0 +1,25 @@
+get:
+  tags:
+    - External Project
+  summary: Get an External Project by id
+  description: Get an External Project by id.
+  operationId: getExternalProjectById
+  parameters:
+    - name: projectId
+      in: path
+      description: The ID of the External Project to retrieve
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/v1/externalProject_response.yml"
+    '400':
+      description: BadRequest
+    '404':
+      description: Not Found

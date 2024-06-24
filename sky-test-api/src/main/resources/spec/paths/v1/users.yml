@@ -1,3 +1,25 @@
+post:
+  summary: Create a new user
+  description: Create a new user
+  operationId: createUser
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/v1/user_create_request.yml'
+  responses:
+    '201':
+      description: User created successfully
+      headers:
+        Location:
+          description: The location of the new customer
+          schema:
+            type: string
+            format: uri
+            example: /v1/users/27ca5995-f6e1-46bb-8f18-52458b7ed96e
+    '400':
+      description: Invalid input
 get:
   tags:
     - User
@@ -6,7 +28,7 @@ get:
   operationId: listUsers
   responses:
     '200':
-      description: Success
+      description: successful operation
       content:
         application/json:
           schema:

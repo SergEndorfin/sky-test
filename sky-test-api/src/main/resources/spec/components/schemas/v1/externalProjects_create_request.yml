@@ -1,0 +1,10 @@
+type: object
+properties:
+  name:
+    type: string
+    example: "Video streaming project"
+  description:
+    type: string
+    example: "External Video streaming project"
+required:
+  - name

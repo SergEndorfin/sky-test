@@ -1,3 +1,3 @@
 type: array
 items:
-  $ref: user.yml
+  $ref: user_response.yml

@@ -1,9 +1,9 @@
 package click.itkon.skytest.repositories;
 
-import click.itkon.apifirst.model.UserDto;
-import org.springframework.data.repository.CrudRepository;
+import click.itkon.skytest.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface UserRepository extends CrudRepository<UserDto, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 }
