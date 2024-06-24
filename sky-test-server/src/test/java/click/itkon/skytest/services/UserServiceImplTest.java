@@ -1,52 +1,96 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.UserNameDto;
+import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.domain.User;
+import click.itkon.skytest.exceptions.NotFoundException;
+import click.itkon.skytest.mappers.UserMapper;
 import click.itkon.skytest.repositories.UserRepository;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
-    @Autowired
-    UserService customerService;
+    @Mock
+    UserMapper userMapperMock;
 
-    @Autowired
-    UserRepository userRepository;
+    @Mock
+    UserRepository userRepositoryMock;
 
-    @Transactional
+    @InjectMocks
+    UserServiceImpl userService;
+
+    User userEntity = User.builder().build();
+    UserResponseDto userResponseDto = UserResponseDto.builder().build();
+    UUID id = UUID.randomUUID();
+
     @Test
     void createUser() {
-//        UserDto userDto = createUserDto();
-//        UserDto createdUser = customerService.createUser(userDto);
+        UserCreateRequestDto userCreateRequestDto = UserCreateRequestDto.builder().build();
 
-//        assertNotNull(createdUser);
-//        assertNotNull(createdUser.getId());
-//
-//        User user = userRepository.findById(createdUser.getId()).orElseThrow();
-//        assertNotNull(user);
-//        UserName userName = user.getName();
-//        assertNotNull(userName);
-//        assertEquals(userDto.getName().getFirstName(), userName.getFirstName());
-//        assertEquals(userDto.getName().getLastName(), userName.getLastName());
+        when(userMapperMock.createUserDtoToUser(userCreateRequestDto)).thenReturn(userEntity);
+        when(userRepositoryMock.save(userEntity)).thenReturn(userEntity);
+        doNothing().when(userRepositoryMock).flush();
+
+        userService.createUser(userCreateRequestDto);
+
+        verify(userMapperMock).createUserDtoToUser(userCreateRequestDto);
+        verify(userRepositoryMock).save(userEntity);
+        verify(userRepositoryMock).flush();
     }
 
     @Test
     void listUsers() {
+        List<User> foundUsers = List.of(userEntity);
+        when(userRepositoryMock.findAll()).thenReturn(foundUsers);
+        when(userMapperMock.userToResponseDto(userEntity)).thenReturn(userResponseDto);
+
+        userService.listUsers();
+
+        verify(userRepositoryMock).findAll();
+        verify(userMapperMock).userToResponseDto(userEntity);
     }
 
     @Test
     void getUserById() {
+        Optional<User> userOptional = Optional.of(userEntity);
+        when(userRepositoryMock.findById(id)).thenReturn(userOptional);
+        when(userMapperMock.userToResponseDto(userEntity)).thenReturn(userResponseDto);
+
+        userService.getUserById(id);
+
+        verify(userRepositoryMock).findById(id);
+        verify(userMapperMock).userToResponseDto(userEntity);
     }
 
-//    UserDto createUserDto() {
-//        return UserDto.builder()
-//                .email("email@email.com")
-//                .password("qwe123")
-//                .name(UserNameDto.builder().firstName("Sam").lastName("Samson").build())
-//                .role(UserDto.RoleEnum.USER)
-//                .build();
-//    }
+    @Test
+    void deleteUser_userFound() {
+        Optional<User> userOptional = Optional.of(userEntity);
+        when(userRepositoryMock.findById(id)).thenReturn(userOptional);
+        doNothing().when(userRepositoryMock).delete(userEntity);
+
+        userService.deleteUser(id);
+
+        verify(userRepositoryMock).findById(id);
+        verify(userRepositoryMock).delete(userEntity);
+    }
+
+    @Test
+    void deleteUser_userNotFound() {
+        when(userRepositoryMock.findById(id)).thenReturn(Optional.empty());
+        NotFoundException ex = assertThrows(NotFoundException.class, () -> userService.deleteUser(id));
+        assertEquals("User Not Found", ex.getMessage());
+    }
 }
