@@ -38,4 +38,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/Error.yml"
+            $ref: "../../components/responses/error.yml"

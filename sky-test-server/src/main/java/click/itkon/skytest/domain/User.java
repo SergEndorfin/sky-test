@@ -2,6 +2,8 @@ package click.itkon.skytest.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -33,9 +35,13 @@ public class User {
 
     @Email
     @Column(unique = true, nullable = false)
+    @NotNull
+    @Size(min = 3, max = 255)
     private String email;
 
     @Column(nullable = false)
+    @NotNull
+    @Size(min = 3)
     private String password;
 
     @Builder.Default

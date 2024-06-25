@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-import static click.itkon.skytest.exceptions.NotFoundException.ERROR_MESSAGE;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +25,7 @@ public class ExternalProjectServiceImpl implements ExternalProjectService {
     public UUID addExternalProject(UUID userId,
                                    ExternalProjectsCreateRequestDto createRequestDto) {
         var user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(ERROR_MESSAGE + userId));
+                .orElseThrow(() -> new NotFoundException(userId.toString()));
 
         var projectEntity = externalProjectMapper.createExternalProjectDtoToExternalProject(createRequestDto);
         projectEntity.setUser(user);

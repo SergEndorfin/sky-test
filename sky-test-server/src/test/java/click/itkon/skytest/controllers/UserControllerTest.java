@@ -2,6 +2,7 @@ package click.itkon.skytest.controllers;
 
 import click.itkon.apifirst.model.UserCreateRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.exceptions.NotFoundException;
 import click.itkon.skytest.services.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -30,14 +31,14 @@ public class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private UserServiceImpl userService;
+    private UserServiceImpl userServiceMock;
 
     @Test
     public void createUser_ShouldReturn201() throws Exception {
         var userCreateRequestDto = UserCreateRequestDto.builder().build();
         var userResponseDto = UserResponseDto.builder().build();
 
-        when(userService.createUser(any(UserCreateRequestDto.class))).thenReturn(userResponseDto);
+        when(userServiceMock.createUser(any(UserCreateRequestDto.class))).thenReturn(userResponseDto);
 
         mockMvc.perform(post(UserController.BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -45,12 +46,12 @@ public class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
 
-        verify(userService, times(1)).createUser(any(UserCreateRequestDto.class));
+        verify(userServiceMock, times(1)).createUser(any(UserCreateRequestDto.class));
     }
 
     @Test
     public void getAllUsers_ShouldReturn200() throws Exception {
-        when(userService.listUsers()).thenReturn(List.of(UserResponseDto.builder().build()));
+        when(userServiceMock.listUsers()).thenReturn(List.of(UserResponseDto.builder().build()));
 
         mockMvc.perform(get(UserController.BASE_URL))
                 .andExpect(status().isOk())
@@ -60,7 +61,7 @@ public class UserControllerTest {
     @Test
     public void getUser_ShouldReturn200() throws Exception {
         var userId = UUID.randomUUID();
-        when(userService.getUserById(userId)).thenReturn(UserResponseDto.builder().id(userId).build());
+        when(userServiceMock.getUserById(userId)).thenReturn(UserResponseDto.builder().id(userId).build());
         mockMvc.perform(get(UserController.BASE_URL + "/{userId}", userId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(userId.toString()));
@@ -69,16 +70,16 @@ public class UserControllerTest {
     @Test
     public void deleteUser_ShouldReturn204() throws Exception {
         var userId = UUID.randomUUID();
-        when(userService.getUserById(userId)).thenReturn(UserResponseDto.builder().id(userId).build());
+        when(userServiceMock.getUserById(userId)).thenReturn(UserResponseDto.builder().id(userId).build());
         mockMvc.perform(delete(UserController.BASE_URL + "/{userId}", userId))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     public void deleteUser_ShouldReturn404() throws Exception {
-//        var userId = UUID.randomUUID();
-//        when(userService.getUserById(userId)).thenThrow(NotFoundException.class);
-//        mockMvc.perform(delete(UserController.BASE_URL + "/{userId}", userId))
-//                .andExpect(status().isOk()); // TODO: fix the return code after error handling
+        var userId = UUID.randomUUID();
+        doThrow(NotFoundException.class).when(userServiceMock).deleteUser(userId);
+        mockMvc.perform(delete(UserController.BASE_URL + "/{userId}", userId))
+                .andExpect(status().isNotFound());
     }
 }

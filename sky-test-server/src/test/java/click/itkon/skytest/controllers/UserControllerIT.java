@@ -2,10 +2,13 @@ package click.itkon.skytest.controllers;
 
 import click.itkon.apifirst.model.UserCreateRequestDto;
 import click.itkon.apifirst.model.UserNameDto;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -40,7 +43,7 @@ class UserControllerIT extends BaseTest {
 
     @DisplayName("Get by Id")
     @Test
-    void getUserById() throws Exception {
+    void getUserById_existingUser() throws Exception {
         mockMvc.perform(get(UserController.BASE_URL + "/{userId}", testUserEntity.getId())
                         .accept(MediaType.APPLICATION_JSON)
                 )
@@ -48,11 +51,29 @@ class UserControllerIT extends BaseTest {
                 .andExpect(jsonPath("$.id").value(testUserEntity.getId().toString()));
     }
 
-    @DisplayName("Delete user by Id")
+    @DisplayName("Get by Id")
     @Test
-    void deleteUserById() throws Exception {
+    void getUserById_userNotFoun() throws Exception {
+        mockMvc.perform(get(UserController.BASE_URL + "/{userId}", UUID.randomUUID())
+                        .accept(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNotFound());
+    }
+
+    @Transactional
+    @DisplayName("Delete user by Id when found")
+    @Test
+    void deleteUserById_existingUser() throws Exception {
         mockMvc.perform(delete(UserController.BASE_URL + "/{userId}", testUserEntity.getId())
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
+    }
+
+    @DisplayName("Delete user by Id when not found")
+    @Test
+    void deleteUserById_userNotFound() throws Exception {
+        mockMvc.perform(delete(UserController.BASE_URL + "/{userId}", UUID.randomUUID())
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }

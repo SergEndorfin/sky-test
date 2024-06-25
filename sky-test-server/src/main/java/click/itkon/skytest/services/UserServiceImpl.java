@@ -45,14 +45,14 @@ public class UserServiceImpl implements UserService {
         log.info("Getting user by id: {}", userId);
         return userRepository.findById(userId)
                 .map(userMapper::userToResponseDto)
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException(userId.toString()));
     }
 
     @Override
     public void deleteUser(UUID userId) {
         userRepository.findById(userId)
                 .ifPresentOrElse(userRepository::delete, () -> {
-                    throw new NotFoundException("User Not Found");
+                    throw new NotFoundException(userId.toString());
                 });
     }
 }
