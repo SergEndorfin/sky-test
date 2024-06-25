@@ -39,7 +39,7 @@ public class User {
     private String password;
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExternalProject> externalProjects = new ArrayList<>();
 
     @CreationTimestamp

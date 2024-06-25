@@ -46,8 +46,6 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
             $ref: "../../components/schemas/v1/externalProjects_list.yml"
     '400':
       description: Bad request

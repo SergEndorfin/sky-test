@@ -8,8 +8,6 @@ properties:
   description:
     type: string
     example: "External Video streaming project"
-  user:
-    $ref: "../v1/user_response.yml"
   dateCreated:
     $ref: "../common/iso_timestamp.yaml"
   dateUpdated:
@@ -18,6 +16,5 @@ required:
   - id
   - name
   - description
-  - user
   - dateCreated
   - dateUpdated

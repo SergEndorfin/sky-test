@@ -22,7 +22,7 @@ paths:
     $ref: "./paths/v1/users.yml"
   /v1/users/{userId}:
     $ref: "./paths/v1/users_userId.yml"
-  /v1/users/{userId}/externalProjects:
+  /v1/users/{userId}/external-projects:
     $ref: "./paths/v1/externalProjects.yml"
   /v1/users/{userId}/external-projects/{projectId}:
     $ref: "./paths/v1/externalProjects_projectId.yml"
