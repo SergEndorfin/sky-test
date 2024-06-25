@@ -1,8 +1,8 @@
 package click.itkon.skytest.mappers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserNameDto;
-import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.model.UserCreateRequestDto;
+import click.itkon.skytest.model.UserNameDto;
+import click.itkon.skytest.model.UserResponseDto;
 import click.itkon.skytest.domain.ExternalProject;
 import click.itkon.skytest.domain.User;
 import click.itkon.skytest.domain.UserName;

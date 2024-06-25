@@ -18,8 +18,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>sky-test-api</module>
         <module>sky-test-server</module>
+        <module>sky-test-gen</module>
     </modules>
 
     <properties>

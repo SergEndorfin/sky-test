@@ -1,7 +1,7 @@
 package click.itkon.skytest.mappers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.model.UserCreateRequestDto;
+import click.itkon.skytest.model.UserResponseDto;
 import click.itkon.skytest.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

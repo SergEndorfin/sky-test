@@ -1,7 +1,7 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.model.UserCreateRequestDto;
+import click.itkon.skytest.model.UserResponseDto;
 import click.itkon.skytest.exceptions.NotFoundException;
 import click.itkon.skytest.services.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;

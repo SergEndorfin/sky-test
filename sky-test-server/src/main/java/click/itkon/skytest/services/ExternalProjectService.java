@@ -1,7 +1,7 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.ExternalProjectResponseDto;
-import click.itkon.apifirst.model.ExternalProjectsCreateRequestDto;
+import click.itkon.skytest.model.ExternalProjectResponseDto;
+import click.itkon.skytest.model.ExternalProjectsCreateRequestDto;
 
 import java.util.List;
 import java.util.UUID;

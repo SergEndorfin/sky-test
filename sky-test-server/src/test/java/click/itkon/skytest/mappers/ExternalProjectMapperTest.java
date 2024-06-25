@@ -1,6 +1,6 @@
 package click.itkon.skytest.mappers;
 
-import click.itkon.apifirst.model.ExternalProjectsCreateRequestDto;
+import click.itkon.skytest.model.ExternalProjectsCreateRequestDto;
 import click.itkon.skytest.domain.ExternalProject;
 import click.itkon.skytest.domain.User;
 import org.junit.jupiter.api.Test;

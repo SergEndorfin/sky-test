@@ -1,7 +1,7 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.ExternalProjectResponseDto;
-import click.itkon.apifirst.model.ExternalProjectsCreateRequestDto;
+import click.itkon.skytest.model.ExternalProjectResponseDto;
+import click.itkon.skytest.model.ExternalProjectsCreateRequestDto;
 import click.itkon.skytest.services.ExternalProjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

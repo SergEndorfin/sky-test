@@ -1,9 +1,8 @@
 package click.itkon.skytest.mappers;
 
-import click.itkon.apifirst.model.ExternalProjectResponseDto;
-import click.itkon.apifirst.model.ExternalProjectsCreateRequestDto;
 import click.itkon.skytest.domain.ExternalProject;
-import org.mapstruct.DecoratedWith;
+import click.itkon.skytest.model.ExternalProjectResponseDto;
+import click.itkon.skytest.model.ExternalProjectsCreateRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -14,6 +13,5 @@ public interface ExternalProjectMapper {
     @Mapping(target = "dateUpdated", ignore = true)
     ExternalProject createExternalProjectDtoToExternalProject(ExternalProjectsCreateRequestDto externalProjectsCreateRequestDto);
 
-    @Mapping(target = "user.externalProjects", ignore = true)
     ExternalProjectResponseDto externalProjectToResponseDto(ExternalProject externalProject);
 }

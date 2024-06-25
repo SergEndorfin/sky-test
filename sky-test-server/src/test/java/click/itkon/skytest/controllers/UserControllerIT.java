@@ -1,7 +1,7 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserNameDto;
+import click.itkon.skytest.model.UserCreateRequestDto;
+import click.itkon.skytest.model.UserNameDto;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

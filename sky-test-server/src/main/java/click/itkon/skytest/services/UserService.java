@@ -1,7 +1,7 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.model.UserCreateRequestDto;
+import click.itkon.skytest.model.UserResponseDto;
 
 import java.util.List;
 import java.util.UUID;
