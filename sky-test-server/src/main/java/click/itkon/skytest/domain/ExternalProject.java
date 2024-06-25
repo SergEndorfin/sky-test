@@ -1,6 +1,8 @@
 package click.itkon.skytest.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -24,6 +26,8 @@ public class ExternalProject {
     @Column(length = 36, columnDefinition = "char (36)", updatable = false, nullable = false)
     private UUID id;
 
+    @NotNull
+    @Size(min = 2)
     private String name;
     private String description;
 
