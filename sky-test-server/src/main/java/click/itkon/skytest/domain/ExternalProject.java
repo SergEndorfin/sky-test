@@ -18,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "tb_external_project")
 public class ExternalProject {
 
     @Id
