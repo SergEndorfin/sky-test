@@ -1,6 +1,6 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
 import click.itkon.skytest.domain.User;
 import click.itkon.skytest.exceptions.NotFoundException;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
+    public UserResponseDto createUser(UserAuthRequestDto userCreateRequestDto) {
         log.info("Creating user");
         User savedUser = userRepository.save(userMapper.createUserDtoToUser(userCreateRequestDto));
         userRepository.flush();

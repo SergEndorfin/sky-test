@@ -1,7 +1,6 @@
 package click.itkon.skytest.mappers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserNameDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
 import click.itkon.skytest.domain.ExternalProject;
 import click.itkon.skytest.domain.User;
@@ -13,6 +12,7 @@ import java.util.Collections;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class UserMapperTest {
 
@@ -20,17 +20,16 @@ class UserMapperTest {
 
     @Test
     void createUserDtoToUser() {
-        var userCreateRequestDto = UserCreateRequestDto.builder()
+        var userCreateRequestDto = UserAuthRequestDto.builder()
                 .password("qwe123")
                 .email("qwe@gmail.com")
-                .name(UserNameDto.builder().firstName("Sam").lastName("Samson").build())
                 .build();
-        User userEntity = userMapper.createUserDtoToUser(userCreateRequestDto);
+
+        var userEntity = userMapper.createUserDtoToUser(userCreateRequestDto);
 
         assertEquals(userCreateRequestDto.getEmail(), userEntity.getEmail());
         assertEquals(userCreateRequestDto.getPassword(), userEntity.getPassword());
-        assertEquals(userCreateRequestDto.getName().getFirstName(), userEntity.getName().getFirstName());
-        assertEquals(userCreateRequestDto.getName().getLastName(), userEntity.getName().getLastName());
+        assertNull(userEntity.getName());
     }
 
     @Test

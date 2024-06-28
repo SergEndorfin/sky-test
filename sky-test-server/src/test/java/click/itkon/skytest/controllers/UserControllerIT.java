@@ -1,7 +1,6 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
-import click.itkon.apifirst.model.UserNameDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,9 +19,8 @@ class UserControllerIT extends BaseTest {
     @DisplayName("Create a new User")
     @Test
     void createUser() throws Exception {
-        UserCreateRequestDto userCreateRequestDto = UserCreateRequestDto.builder()
+        var userCreateRequestDto = UserAuthRequestDto.builder()
                 .email("test@email.com")
-                .name(UserNameDto.builder().firstName("Sam").lastName("Samson").build())
                 .password("qwe123")
                 .build();
 

@@ -24,6 +24,8 @@ get:
     '404':
       description: Not Found
 delete:
+  tags:
+    - User
   summary: Delete a user
   description: Delete a user
   operationId: deleteUserById

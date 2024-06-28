@@ -1,6 +1,6 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
 import click.itkon.skytest.services.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -21,8 +21,8 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserCreateRequestDto userCreateRequestDto) {
-        UserResponseDto savedUser = userService.createUser(userCreateRequestDto);
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserAuthRequestDto userAuthRequestDto) {
+        UserResponseDto savedUser = userService.createUser(userAuthRequestDto);
         return ResponseEntity.created(URI.create(BASE_URL + "/" + savedUser.getId())).build();
     }
 

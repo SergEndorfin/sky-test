@@ -1,6 +1,6 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
 import click.itkon.skytest.exceptions.NotFoundException;
 import click.itkon.skytest.services.UserServiceImpl;
@@ -35,10 +35,10 @@ public class UserControllerTest {
 
     @Test
     public void createUser_ShouldReturn201() throws Exception {
-        var userCreateRequestDto = UserCreateRequestDto.builder().build();
+        var userCreateRequestDto = UserAuthRequestDto.builder().build();
         var userResponseDto = UserResponseDto.builder().build();
 
-        when(userServiceMock.createUser(any(UserCreateRequestDto.class))).thenReturn(userResponseDto);
+        when(userServiceMock.createUser(any(UserAuthRequestDto.class))).thenReturn(userResponseDto);
 
         mockMvc.perform(post(UserController.BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -46,7 +46,7 @@ public class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
 
-        verify(userServiceMock, times(1)).createUser(any(UserCreateRequestDto.class));
+        verify(userServiceMock, times(1)).createUser(any(UserAuthRequestDto.class));
     }
 
     @Test
