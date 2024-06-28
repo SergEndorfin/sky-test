@@ -5,13 +5,7 @@ get:
   description: Get an user by id.
   operationId: getUserById
   parameters:
-    - name: userId
-      in: path
-      description: The ID of the user to retrieve
-      required: true
-      schema:
-        type: string
-        format: uuid
+    - $ref: "../../components/parameters/user_id.yml"
   responses:
     '200':
       description: successful operation
@@ -30,13 +24,35 @@ delete:
   description: Delete a user
   operationId: deleteUserById
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: "../../components/parameters/user_id.yml"
   responses:
     '204':
       description: User deleted successfully
     '404':
       description: User not found
+put:
+  tags:
+    - User
+  summary: Update a user data
+  description: Update a user data
+  operationId: updateUserById
+  parameters:
+    - $ref: "../../components/parameters/user_id.yml"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/v1/user_update_request.yml"
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/v1/user_response.yml"
+    '400':
+      description: Bad request
+    #      $ref: ../../components/responses/bad_request_400.yaml
+    '404':
+      description: User not found
+#      $ref: ../../components/responses/not_found_404.yaml

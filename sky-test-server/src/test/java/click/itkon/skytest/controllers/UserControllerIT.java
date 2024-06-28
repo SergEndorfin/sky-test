@@ -1,6 +1,8 @@
 package click.itkon.skytest.controllers;
 
 import click.itkon.apifirst.model.UserAuthRequestDto;
+import click.itkon.apifirst.model.UserNameDto;
+import click.itkon.apifirst.model.UserUpdateRequestDto;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,5 +75,48 @@ class UserControllerIT extends BaseTest {
         mockMvc.perform(delete(UserController.BASE_URL + "/{userId}", UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @DisplayName("Update user by Id")
+    @Test
+    void updateUserById_userFound() throws Exception {
+        UUID userIdFromDb = testUserEntity.getId();
+
+        var updateRequestDto = UserUpdateRequestDto.builder()
+                .email(testUserEntity.getEmail())
+                .password(testUserEntity.getPassword())
+                .name(UserNameDto.builder().prefix("Mr.").firstName("Test").lastName("Test").build())
+                .build();
+
+        mockMvc.perform(put(UserController.BASE_URL + "/{userId}", userIdFromDb)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequestDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(testUserEntity.getId().toString()))
+                .andExpect(jsonPath("$.name.prefix").value(testUserEntity.getName().getPrefix()))
+                .andExpect(jsonPath("$.name.firstName").value(testUserEntity.getName().getFirstName()))
+                .andExpect(jsonPath("$.name.lastName").value(testUserEntity.getName().getLastName()));
+    }
+
+    @DisplayName("Update user by Id")
+    @Test
+    void updateUserById_withFirstNameOnly_userFound() throws Exception {
+        UUID userIdFromDb = testUserEntity.getId();
+
+        var updateRequestDto = UserUpdateRequestDto.builder()
+                .email(testUserEntity.getEmail())
+                .password(testUserEntity.getPassword())
+                .name(UserNameDto.builder().firstName("Test").build())
+                .build();
+
+        mockMvc.perform(put(UserController.BASE_URL + "/{userId}", userIdFromDb)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequestDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(testUserEntity.getId().toString()))
+                .andExpect(jsonPath("$.name.prefix").value(updateRequestDto.getName().getPrefix()))
+                .andExpect(jsonPath("$.name.firstName").value(updateRequestDto.getName().getFirstName()))
+                .andExpect(jsonPath("$.name.lastName").value(updateRequestDto.getName().getLastName()))
+                .andExpect(jsonPath("$.externalProjects.length()", greaterThan(0)));
     }
 }

@@ -32,9 +32,9 @@ public class DataLoader implements CommandLineRunner {
                                     .description("First important project").build(),
                             ExternalProject.builder()
                                     .name("Project 2")
-                                    .description("Second important project").build()
-                    ))
+                                    .description("Second important project").build()))
                     .build();
+
             user.getExternalProjects().forEach(ep -> ep.setUser(user));
 
             userRepository.save(user);

@@ -25,7 +25,7 @@ post:
 get:
   tags:
     - User
-  summary: Get a list of Users
+  summary: Get a list of users
   description: Get a list of Users
   operationId: listUsers
   responses:

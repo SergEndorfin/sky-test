@@ -2,6 +2,7 @@ package click.itkon.skytest.controllers;
 
 import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.apifirst.model.UserUpdateRequestDto;
 import click.itkon.skytest.services.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -40,5 +42,11 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable("userId") UUID userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable("userId") UUID userId,
+                                                      @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+        return ResponseEntity.ok(userService.updateUser(userId, userUpdateRequestDto));
     }
 }
