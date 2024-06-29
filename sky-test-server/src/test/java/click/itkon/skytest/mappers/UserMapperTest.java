@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserMapperTest {
 
-    UserMapper userMapper = new UserMapperImpl();
+    UserMapper userMapper = new UserMapperImpl_();
 
     @Test
     void createUserDtoToUser() {

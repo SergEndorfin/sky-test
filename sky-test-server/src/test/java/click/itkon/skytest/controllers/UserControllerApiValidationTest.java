@@ -33,6 +33,20 @@ class UserControllerApiValidationTest extends BaseTest {
                 .andExpect(header().exists("Location"));
     }
 
+    @DisplayName("Create a user with existing email")
+    @Test
+    void createUserWithTheSameEmailAsBefore() throws Exception {
+        var userCreateRequestDto = UserAuthRequestDto.builder()
+                .email(testUserEntity.getEmail())
+                .password("qwe123")
+                .build();
+
+        mockMvc.perform(post(UserController.BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userCreateRequestDto)))
+                .andExpect(status().isConflict());
+    }
+
     @DisplayName("Get Users list")
     @Test
     void listUsers() throws Exception {

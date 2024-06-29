@@ -91,7 +91,7 @@ class UserServiceImplTest {
     void deleteUser_userNotFound() {
         when(userRepositoryMock.findById(id)).thenReturn(Optional.empty());
         NotFoundException ex = assertThrows(NotFoundException.class, () -> userService.deleteUser(id));
-        String expectedErrorMessage = "Source not found. ID: " + id.toString();
+        String expectedErrorMessage = "Source not found. By: " + id.toString();
         assertEquals(expectedErrorMessage, ex.getMessage());
     }
 }

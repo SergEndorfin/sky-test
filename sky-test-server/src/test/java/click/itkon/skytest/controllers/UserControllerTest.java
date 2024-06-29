@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -48,6 +49,20 @@ public class UserControllerTest {
                         .content(objectMapper.writeValueAsString(userCreateRequestDto)))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
+
+        verify(userServiceMock, times(1)).createUser(any(UserAuthRequestDto.class));
+    }
+
+    @Test
+    public void createUser_ShouldReturn409() throws Exception {
+        var userCreateRequestDto = UserAuthRequestDto.builder().build();
+
+        doThrow(DataIntegrityViolationException.class).when(userServiceMock).createUser(any(UserAuthRequestDto.class));
+
+        mockMvc.perform(post(UserController.BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userCreateRequestDto)))
+                .andExpect(status().isConflict());
 
         verify(userServiceMock, times(1)).createUser(any(UserAuthRequestDto.class));
     }

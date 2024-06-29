@@ -22,6 +22,8 @@ post:
             example: /v1/users/27ca5995-f6e1-46bb-8f18-52458b7ed96e
     '400':
       description: Invalid input
+    '409':
+      description: Database integrity invalid input
 get:
   tags:
     - User

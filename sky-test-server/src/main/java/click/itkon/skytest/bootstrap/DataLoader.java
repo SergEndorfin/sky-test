@@ -6,15 +6,19 @@ import click.itkon.skytest.domain.UserName;
 import click.itkon.skytest.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Profile("!prod")
 public class DataLoader implements CommandLineRunner {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -24,7 +28,7 @@ public class DataLoader implements CommandLineRunner {
         if (!userRepository.existsByEmail(email)) {
             User user = User.builder()
                     .email(email)
-                    .password("123")
+                    .password(passwordEncoder.encode("123qwe"))
                     .name(UserName.builder().firstName("Sam").lastName("Smith").build())
                     .externalProjects(List.of(
                             ExternalProject.builder()

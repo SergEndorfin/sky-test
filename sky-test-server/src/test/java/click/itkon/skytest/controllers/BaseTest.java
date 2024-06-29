@@ -36,6 +36,5 @@ public class BaseTest {
                 .addFilter(validationFilter)
                 .build();
         testUserEntity = userRepository.findAll().iterator().next();
-        System.out.println(">>> testUserEntity: " + testUserEntity);
     }
 }
