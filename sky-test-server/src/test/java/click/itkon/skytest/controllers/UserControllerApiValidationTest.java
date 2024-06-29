@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-class UserControllerIT extends BaseTest {
+class UserControllerApiValidationTest extends BaseTest {
 
     @DisplayName("Create a new User")
     @Test
@@ -93,9 +93,9 @@ class UserControllerIT extends BaseTest {
                         .content(objectMapper.writeValueAsString(updateRequestDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(testUserEntity.getId().toString()))
-                .andExpect(jsonPath("$.name.prefix").value(testUserEntity.getName().getPrefix()))
-                .andExpect(jsonPath("$.name.firstName").value(testUserEntity.getName().getFirstName()))
-                .andExpect(jsonPath("$.name.lastName").value(testUserEntity.getName().getLastName()));
+                .andExpect(jsonPath("$.name.prefix").value(updateRequestDto.getName().getPrefix()))
+                .andExpect(jsonPath("$.name.firstName").value(updateRequestDto.getName().getFirstName()))
+                .andExpect(jsonPath("$.name.lastName").value(updateRequestDto.getName().getLastName()));
     }
 
     @DisplayName("Update user by Id")

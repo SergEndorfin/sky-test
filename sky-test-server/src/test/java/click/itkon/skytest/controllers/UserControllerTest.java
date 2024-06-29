@@ -2,6 +2,7 @@ package click.itkon.skytest.controllers;
 
 import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.config.NoSecurityConfig;
 import click.itkon.skytest.exceptions.NotFoundException;
 import click.itkon.skytest.services.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,6 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
+@Import(NoSecurityConfig.class)
 public class UserControllerTest {
 
     @Autowired

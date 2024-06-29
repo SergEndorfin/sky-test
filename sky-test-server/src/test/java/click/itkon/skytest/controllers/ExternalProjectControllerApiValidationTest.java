@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-class ExternalProjectControllerIT extends BaseTest {
+class ExternalProjectControllerApiValidationTest extends BaseTest {
 
     @DisplayName("Add a new External Project")
     @Test
