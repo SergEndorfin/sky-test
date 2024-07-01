@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.0.0
-  title: Sky Test App with Spring Boot
+  title: Sky Test App with Spring Boot - User and External Project Management API
   contact:
     email: sergendorfin@gmail.com
     url: https://www.linkedin.com/in/sergii-kononenko/
@@ -9,14 +9,20 @@ info:
     name: open
   description: >
     This is an **example** API to demonstrate features of the OpenAPI
-    specification and my skills.
+    specification and my skills.\
+servers:
+  - url: http://localhost:8080/api
 tags:
   - name: User
     description: User operations
-  - name: Project
+  - name: External Project
     description: Project operations
 paths:
   /v1/users:
     $ref: "./paths/v1/users.yml"
   /v1/users/{userId}:
-    $ref: "./paths/v1/users_{userId}.yml"
+    $ref: "./paths/v1/users_userId.yml"
+  /v1/users/{userId}/external-projects:
+    $ref: "./paths/v1/externalProjects.yml"
+  /v1/users/{userId}/external-projects/{projectId}:
+    $ref: "./paths/v1/externalProjects_projectId.yml"

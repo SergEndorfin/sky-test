@@ -1,20 +1,18 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.User;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserResponseDto;
 
 import java.util.List;
+import java.util.UUID;
 
-@Service
-@Slf4j
-public class UserService {
+public interface UserService {
 
-    public List<User> listUsers() {
-        log.info("Retrieve -> all users");
-        return List.of(User.builder()
-                .email("mail@mail.com")
-                .password("secret")
-                .build());
-    }
+    UserResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
+
+    List<UserResponseDto> listUsers();
+
+    UserResponseDto getUserById(UUID userId);
+
+    void deleteUser(UUID userId);
 }

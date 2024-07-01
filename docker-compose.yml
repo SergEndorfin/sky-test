@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: skytestdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+  sky-test-server:
+    build: ./sky-test-server
+    image: sky-test-server
+    depends_on:
+      - mysqldb
+    ports:
+      - "8080:8080"
+    environment:
+      spring.datasource.url: "jdbc:mysql://mysqldb:3306/skytestdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"

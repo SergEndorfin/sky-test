@@ -1,14 +1,13 @@
 get:
   tags:
-    - Customer
-  summary: Get a Customer by ID
-  description: |
-    Get a Customer by ID
-  operationId: getCustomerById
+    - External Project
+  summary: Get an External Project by id
+  description: Get an External Project by id.
+  operationId: getExternalProjectById
   parameters:
-    - name: customerId
+    - name: projectId
       in: path
-      description: The ID of the Customer to retrieve
+      description: The ID of the External Project to retrieve
       required: true
       schema:
         type: string
@@ -19,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/v"
+            $ref: "../../components/schemas/v1/externalProject_response.yml"
     '400':
       description: BadRequest
     '404':

@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    $ref: "../common/uuid_id.yml"
+  email:
+    type: string
+    example: user@example.com
+  name:
+    $ref: userName.yml
+  externalProjects:
+    $ref: externalProjects_list.yml
+  dateCreated:
+    $ref: "../common/iso_timestamp.yaml"
+  dateUpdated:
+    $ref: "../common/iso_timestamp.yaml"

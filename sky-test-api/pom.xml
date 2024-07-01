@@ -73,6 +73,7 @@
                             <generateModelTests>false</generateModelTests>
                             <generateAliasAsModel>false</generateAliasAsModel>
                             <modelPackage>click.itkon.apifirst.model</modelPackage>
+                            <modelNameSuffix>Dto</modelNameSuffix>
                             <configOptions>
                                 <sourceFolder>src/gen/java/main</sourceFolder>
                                 <useJakartaEe>true</useJakartaEe>
@@ -81,6 +82,32 @@
                                 <additionalModelTypeAnnotations>@lombok.Builder @lombok.AllArgsConstructor
                                 </additionalModelTypeAnnotations>
                             </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/spec</directory>
+                                    <includes>
+                                        <include>open-api-spec.yml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
