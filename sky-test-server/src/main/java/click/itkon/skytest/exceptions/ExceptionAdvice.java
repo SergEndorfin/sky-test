@@ -16,12 +16,4 @@ public class ExceptionAdvice {
     public void conflict(Exception ex) {
         log.error("Error message: {}", ex.getMessage());
     }
-
-//    @ExceptionHandler(Exception.class)
-//    public void unexpectedException(Exception ex) {
-//        log.error("Error class: {}", ex.getClass());
-//        log.error("Error message: {}", ex.getMessage());
-//    }
-
-    //ConstraintViolationException:
 }
