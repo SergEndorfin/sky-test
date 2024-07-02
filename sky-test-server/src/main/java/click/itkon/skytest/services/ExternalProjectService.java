@@ -11,4 +11,6 @@ public interface ExternalProjectService {
     UUID addExternalProject(UUID userId, ExternalProjectsCreateRequestDto externalProjectsCreateRequestDto);
 
     List<ExternalProjectResponseDto> listUsersExternalProjects(UUID userId);
+
+    ExternalProjectResponseDto getExternalProjectByUserIdAndProjectId(UUID userId, UUID projectId);
 }

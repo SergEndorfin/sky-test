@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 
+import java.util.UUID;
+
 import static org.hamcrest.Matchers.greaterThan;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -37,10 +39,22 @@ class ExternalProjectControllerApiValidationTest extends BaseTest {
                 .andExpect(jsonPath("$.length()", greaterThan(0)));
     }
 
+    @DisplayName("Get External Project by userId and projectId")
+    @Test
+    void getExternalProjectByUserIdAndProjectId() throws Exception {
+        UUID projectId = testUserEntity.getExternalProjects().get(0).getId();
+        mockMvc.perform(get(ExternalProjectsController.BASE_URL + "/{projectId}",
+                        testUserEntity.getId(), projectId)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(projectId.toString()));
+    }
+
     private ExternalProjectsCreateRequestDto getExternalProjectsCreateRequestDto() {
         return ExternalProjectsCreateRequestDto.builder()
                 .name("Next Project")
                 .description("Next Project")
                 .build();
     }
+
 }

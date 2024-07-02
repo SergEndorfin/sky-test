@@ -57,13 +57,11 @@ class UserMapperTest {
     @Test
     void updateUserDtoToUser_withoutName() {
         var updateRequestDto = UserUpdateRequestDto.builder()
-                .id(UUID.randomUUID())
                 .email("test@mail.com")
                 .password("123123")
                 .build();
         var user = userMapper.updateUserDtoToUser(updateRequestDto);
 
-        assertEquals(updateRequestDto.getId(), user.getId());
         assertEquals(updateRequestDto.getEmail(), user.getEmail());
         assertEquals(updateRequestDto.getPassword(), user.getPassword());
         assertNull(user.getName());
@@ -73,14 +71,12 @@ class UserMapperTest {
     @Test
     void updateUserDtoToUser_withName() {
         var updateRequestDto = UserUpdateRequestDto.builder()
-                .id(UUID.randomUUID())
                 .email("test@mail.com")
                 .password("123123")
                 .name(UserNameDto.builder().prefix("Mr.").firstName("Sam").lastName("Samson").build())
                 .build();
         var user = userMapper.updateUserDtoToUser(updateRequestDto);
 
-        assertEquals(updateRequestDto.getId(), user.getId());
         assertEquals(updateRequestDto.getEmail(), user.getEmail());
         assertEquals(updateRequestDto.getPassword(), user.getPassword());
         var userName = user.getName();

@@ -29,7 +29,7 @@ public class DataLoader implements CommandLineRunner {
             User user = User.builder()
                     .email(email)
                     .password(passwordEncoder.encode("123qwe"))
-                    .name(UserName.builder().firstName("Sam").lastName("Smith").build())
+                    .name(UserName.builder().prefix("Mr.").firstName("Sam").lastName("Smith").build())
                     .externalProjects(List.of(
                             ExternalProject.builder()
                                     .name("Project 1")

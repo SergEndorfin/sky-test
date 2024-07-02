@@ -23,7 +23,7 @@ post:
           schema:
             type: string
             format: uri
-            example: /v1/users/27ca5995-f6e1-46bb-8f18-52458b7ed96e/external-projects/27ca5995-f6e1-46bb-8f18-52458b7ed96e
+            example: /v1/users/27ca5995-f6e1-46bb-8f18-52458b7ed96e/external-projects/88ca5995-f6e1-46bb-8f18-52458b7ed96e
     '400':
       description: Invalid input
     '404':
@@ -35,11 +35,11 @@ get:
   description: Retrieve external projects from a user
   operationId: listExternalProjects
   parameters:
-    - name: id
+    - name: userId
       in: path
       required: true
       schema:
-        type: integer
+        type: uuid
   responses:
     '200':
       description: External projects retrieved successfully

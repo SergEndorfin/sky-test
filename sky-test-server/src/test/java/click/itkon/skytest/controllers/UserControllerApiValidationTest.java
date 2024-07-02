@@ -65,9 +65,9 @@ class UserControllerApiValidationTest extends BaseTest {
                 .andExpect(jsonPath("$.id").value(testUserEntity.getId().toString()));
     }
 
-    @DisplayName("Get by Id")
+    @DisplayName("Get by Id. User not found")
     @Test
-    void getUserById_userNotFoun() throws Exception {
+    void getUserById_userNotFound() throws Exception {
         mockMvc.perform(get(UserController.BASE_URL + "/{userId}", UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON)
                 )

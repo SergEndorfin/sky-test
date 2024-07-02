@@ -31,6 +31,10 @@ public abstract class UserMapperDecorator implements UserMapper {
 
     @Override
     public User updateUserDtoToUser(UserUpdateRequestDto updateRequestDto) {
+        if (updateRequestDto.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be empty");
+        }
+        updateRequestDto.setPassword(passwordEncoder.encode(updateRequestDto.getPassword()));
         return delegate.updateUserDtoToUser(updateRequestDto);
     }
 }
