@@ -1,0 +1,10 @@
+type: object
+properties:
+  callToAction:
+    type: string
+    example: "Feel free to contact me!"
+  email:
+    type: string
+    example: "sergendorfin@gmail.com"
+required:
+  - email

@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Contacts
+  summary: Get contact details
+  description: Get contact details
+  operationId: getContacts
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/v1/contact.yml"

@@ -1,4 +1,6 @@
 post:
+  tags:
+    - User
   summary: Create a new user
   description: Create a new user
   operationId: createUser
@@ -7,7 +9,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/v1/user_create_request.yml'
+          $ref: '../../components/schemas/v1/user_auth_request.yml'
   responses:
     '201':
       description: User created successfully
@@ -20,10 +22,12 @@ post:
             example: /v1/users/27ca5995-f6e1-46bb-8f18-52458b7ed96e
     '400':
       description: Invalid input
+    '409':
+      description: Database integrity invalid input
 get:
   tags:
     - User
-  summary: Get a list of Users
+  summary: Get a list of users
   description: Get a list of Users
   operationId: listUsers
   responses:

@@ -17,6 +17,8 @@ tags:
     description: User operations
   - name: External Project
     description: Project operations
+  - name: Contact
+    description: Contact data
 paths:
   /v1/users:
     $ref: "./paths/v1/users.yml"
@@ -26,3 +28,5 @@ paths:
     $ref: "./paths/v1/externalProjects.yml"
   /v1/users/{userId}/external-projects/{projectId}:
     $ref: "./paths/v1/externalProjects_projectId.yml"
+  /v1/contacts:
+    $ref: "./paths/v1/contact.yml"

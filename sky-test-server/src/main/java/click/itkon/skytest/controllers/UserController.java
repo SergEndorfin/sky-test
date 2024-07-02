@@ -1,7 +1,8 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.apifirst.model.UserUpdateRequestDto;
 import click.itkon.skytest.services.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserCreateRequestDto userCreateRequestDto) {
-        UserResponseDto savedUser = userService.createUser(userCreateRequestDto);
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserAuthRequestDto userAuthRequestDto) {
+        UserResponseDto savedUser = userService.createUser(userAuthRequestDto);
         return ResponseEntity.created(URI.create(BASE_URL + "/" + savedUser.getId())).build();
     }
 
@@ -40,5 +41,11 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable("userId") UUID userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable("userId") UUID userId,
+                                                      @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+        return ResponseEntity.ok(userService.updateUser(userId, userUpdateRequestDto));
     }
 }

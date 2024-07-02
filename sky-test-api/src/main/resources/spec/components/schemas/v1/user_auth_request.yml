@@ -1,0 +1,15 @@
+type: object
+properties:
+  email:
+    type: string
+    format: email
+    maxLength: 255
+    minLength: 3
+    example: sergendorfin@gmail.com
+  password:
+    type: string
+    minLength: 3
+    example: strongpassword123
+required:
+  - email
+  - password
