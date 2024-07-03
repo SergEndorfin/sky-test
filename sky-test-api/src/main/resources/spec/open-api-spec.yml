@@ -19,6 +19,13 @@ tags:
     description: Project operations
   - name: Contact
     description: Contact data
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: [ ]
 paths:
   /v1/users:
     $ref: "./paths/v1/users.yml"
