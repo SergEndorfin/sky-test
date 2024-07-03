@@ -16,11 +16,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const contentLength = JSON.stringify(pm.response.headers.get()); ",
-									"",
 									"const userId = pm.response.headers.get('Location').split('/').pop()",
 									"",
-									"console.log(\"> just-created-user-id:\", userId); ",
+									"console.log(\"> just created userId:\", userId); ",
 									"",
 									"pm.environment.set('userId', userId); "
 								],
@@ -170,6 +168,42 @@
 							"path": [
 								"v1",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}"
 							]
 						}
 					},
@@ -345,6 +379,14 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
