@@ -1,5 +1,6 @@
 package click.itkon.skytest.repositories;
 
+import click.itkon.skytest.config.RepositoryTestConfig;
 import click.itkon.skytest.domain.ExternalProject;
 import click.itkon.skytest.domain.User;
 import org.junit.jupiter.api.Test;
