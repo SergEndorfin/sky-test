@@ -16,7 +16,7 @@ get:
     '400':
       description: BadRequest
     '404':
-      description: Not Found
+      $ref: "../../components/responses/not_found_404.yml"
 delete:
   tags:
     - User
@@ -29,7 +29,7 @@ delete:
     '204':
       description: User deleted successfully
     '404':
-      description: User not found
+      $ref: "../../components/responses/not_found_404.yml"
 put:
   tags:
     - User
@@ -52,7 +52,5 @@ put:
             $ref: "../../components/schemas/v1/user_response.yml"
     '400':
       description: Bad request
-    #      $ref: ../../components/responses/bad_request_400.yaml
     '404':
-      description: User not found
-#      $ref: ../../components/responses/not_found_404.yaml
+      $ref: "../../components/responses/not_found_404.yml"

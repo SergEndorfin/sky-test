@@ -27,7 +27,7 @@ post:
     '400':
       description: Invalid input
     '404':
-      description: User not found
+      $ref: "../../components/responses/not_found_404.yml"
 get:
   tags:
     - External Project
@@ -50,4 +50,4 @@ get:
     '400':
       description: Bad request
     '404':
-      description: User not found
+      $ref: "../../components/responses/not_found_404.yml"
