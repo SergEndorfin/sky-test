@@ -39,8 +39,4 @@ get:
           schema:
             $ref: "../../components/schemas/v1/users_list.yml"
     '404':
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: "../../components/responses/error.yml"
+      $ref: "../../components/responses/not_found_404.yml"
