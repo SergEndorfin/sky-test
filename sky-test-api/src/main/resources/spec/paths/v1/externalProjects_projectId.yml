@@ -17,4 +17,4 @@ get:
     '400':
       description: BadRequest
     '404':
-      description: Not Found
+      $ref: "../../components/responses/not_found_404.yml"
