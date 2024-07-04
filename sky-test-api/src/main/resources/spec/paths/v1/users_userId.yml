@@ -52,6 +52,5 @@ put:
             $ref: "../../components/schemas/v1/user_response.yml"
     '400':
       description: Bad request
-    #      $ref: ../../components/responses/bad_request_400.yaml
     '404':
       $ref: "../../components/responses/not_found_404.yml"

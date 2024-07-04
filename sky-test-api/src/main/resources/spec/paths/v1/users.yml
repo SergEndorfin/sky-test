@@ -24,7 +24,7 @@ post:
     '400':
       description: Invalid input
     '409':
-      description: Database integrity invalid input
+      $ref: "../../components/responses/conflict_409.yml"
 get:
   tags:
     - User
