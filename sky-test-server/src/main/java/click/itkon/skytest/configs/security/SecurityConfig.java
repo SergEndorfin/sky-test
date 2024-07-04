@@ -26,6 +26,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, UserController.BASE_URL).permitAll()
                         .requestMatchers(UserController.BASE_URL + "/**").authenticated()
                         .requestMatchers(ContactsController.BASE_URL).permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .formLogin(Customizer.withDefaults())
