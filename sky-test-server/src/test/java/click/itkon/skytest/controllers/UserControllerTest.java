@@ -1,7 +1,8 @@
 package click.itkon.skytest.controllers;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
+import click.itkon.skytest.config.NoSecurityConfig;
 import click.itkon.skytest.exceptions.NotFoundException;
 import click.itkon.skytest.services.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
+@Import(NoSecurityConfig.class)
 public class UserControllerTest {
 
     @Autowired
@@ -35,10 +39,10 @@ public class UserControllerTest {
 
     @Test
     public void createUser_ShouldReturn201() throws Exception {
-        var userCreateRequestDto = UserCreateRequestDto.builder().build();
+        var userCreateRequestDto = UserAuthRequestDto.builder().build();
         var userResponseDto = UserResponseDto.builder().build();
 
-        when(userServiceMock.createUser(any(UserCreateRequestDto.class))).thenReturn(userResponseDto);
+        when(userServiceMock.createUser(any(UserAuthRequestDto.class))).thenReturn(userResponseDto);
 
         mockMvc.perform(post(UserController.BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -46,7 +50,21 @@ public class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
 
-        verify(userServiceMock, times(1)).createUser(any(UserCreateRequestDto.class));
+        verify(userServiceMock, times(1)).createUser(any(UserAuthRequestDto.class));
+    }
+
+    @Test
+    public void createUser_ShouldReturn409() throws Exception {
+        var userCreateRequestDto = UserAuthRequestDto.builder().build();
+
+        doThrow(DataIntegrityViolationException.class).when(userServiceMock).createUser(any(UserAuthRequestDto.class));
+
+        mockMvc.perform(post(UserController.BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userCreateRequestDto)))
+                .andExpect(status().isConflict());
+
+        verify(userServiceMock, times(1)).createUser(any(UserAuthRequestDto.class));
     }
 
     @Test

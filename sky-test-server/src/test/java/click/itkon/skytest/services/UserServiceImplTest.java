@@ -1,6 +1,6 @@
 package click.itkon.skytest.services;
 
-import click.itkon.apifirst.model.UserCreateRequestDto;
+import click.itkon.apifirst.model.UserAuthRequestDto;
 import click.itkon.apifirst.model.UserResponseDto;
 import click.itkon.skytest.domain.User;
 import click.itkon.skytest.exceptions.NotFoundException;
@@ -38,7 +38,7 @@ class UserServiceImplTest {
 
     @Test
     void createUser() {
-        UserCreateRequestDto userCreateRequestDto = UserCreateRequestDto.builder().build();
+        var userCreateRequestDto = UserAuthRequestDto.builder().build();
 
         when(userMapperMock.createUserDtoToUser(userCreateRequestDto)).thenReturn(userEntity);
         when(userRepositoryMock.save(userEntity)).thenReturn(userEntity);
@@ -91,7 +91,7 @@ class UserServiceImplTest {
     void deleteUser_userNotFound() {
         when(userRepositoryMock.findById(id)).thenReturn(Optional.empty());
         NotFoundException ex = assertThrows(NotFoundException.class, () -> userService.deleteUser(id));
-        String expectedErrorMessage = "Source not found. ID: " + id.toString();
+        String expectedErrorMessage = "Source not found by: " + id.toString();
         assertEquals(expectedErrorMessage, ex.getMessage());
     }
 }

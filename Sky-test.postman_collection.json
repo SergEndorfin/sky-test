@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "2a2b7049-0883-4c01-af3a-b2861364a64e",
+		"name": "Sky-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30800608"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create an User [no auth]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const userId = pm.response.headers.get('Location').split('/').pop()",
+									"",
+									"console.log(\"> just created userId:\", userId); ",
+									"",
+									"pm.environment.set('userId', userId); "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{userEmail}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User data [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"some-data@mail.com\",\n    \"password\": \"{{password}}\",\n    \"name\": {\n        \"prefix\": \"Mr.\",\n        \"firstName\": \"Bob\",\n        \"lastName\": \"Bobson\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by id [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Users [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "External Project",
+			"item": [
+				{
+					"name": "List of Projects of an User [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}/external-projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}",
+								"external-projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an Ext Project [auth]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const contentLength = JSON.stringify(pm.response.headers.get()); ",
+									"",
+									"const userId = pm.response.headers.get('Location').split('/').pop()",
+									"",
+									"console.log(\"> just created project id:\", userId); ",
+									"",
+									"pm.environment.set('projectId', userId); "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Project AAA-3\",\n    \"description\": \"AAA is a very important project\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}/external-projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}",
+								"external-projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project by userId and projectId [auth]",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{userEmail}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/{{userId}}/external-projects/{{projectId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"{{userId}}",
+								"external-projects",
+								"{{projectId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "Contacts [no auth]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
