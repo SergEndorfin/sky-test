@@ -9,7 +9,7 @@ info:
     name: open
   description: >
     This is an **example** API to demonstrate features of the OpenAPI
-    specification and my skills.\
+    specification and my skills.
 servers:
   - url: http://localhost:8080/api
 tags:
