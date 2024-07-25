@@ -9,12 +9,11 @@ Project requirements described in the "Sky-task-requirements.pdf" file of the pr
 
 <hr>
 
-Technologies and library used:
+Technologies and libraries used:
 - Spring Boot 3
 - Spring Boot Data JPA
 - Spring Security (Basic Auth)
-- Lombok
-- Mapstruct
+- Lombok, Mapstruct and more (see POM file)
 - Docker + docker-compose
 - MySql, H2
 - OpenAPI 3
